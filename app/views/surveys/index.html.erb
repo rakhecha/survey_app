@@ -1,0 +1,70 @@
+<% content_for :title do %>
+    Surveys
+<% end %>
+<%= render :partial => 'partials/header'%>
+<!-- main menu-->
+<%= render :partial => 'partials/sidebar'%>
+<!-- / main menu-->
+<div class="app-content content container-fluid">
+   <div class="content-wrapper">
+      <div class="content-body">
+         <!-- Basic form layout section start -->
+         <section id="basic-form-layouts">
+            <div class="match-height">
+               <div class="card p-0">
+                  <div class="card-header">
+                     <h4 class="card-title">All Surveys</h4>
+                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                     <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                           <li><a href="/surveys/new"><button type="button" class="btn btn-primary">+New Survey</button></a></li>
+                           <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                           <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                           <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="card-body collapse in">
+                  
+                     <div class="card-block">
+                     <% if notice.present?  %>
+                        <div class="alert alert-success" role="alert">
+                            <%= notice %>
+                        </div>
+                    <% end %>
+                        <div class="table-responsive">
+                        
+                           <table class="table">
+                              <thead class="thead-inverse">
+                                 <tr>
+                                    <th>#</th>
+                                    <th>Survey Name</th>
+                                    <th>Status</th>
+                                    <th class="list_action01">Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <% @surveys.each_with_index do |survey, key| %>
+                                    <tr>
+                                       <td><%= key+1 %></td>
+                                       <td><%= survey.title %></td>
+                                       <td><%= survey.status %></td>
+                                       <td class="list_action01">
+                                          <a href="<%= edit_survey_path(survey) %>"><button type="button" class="btn btn-warning">Edit</button></a>
+                                          
+                                       </td>
+                                    </tr>
+                              <% end %>
+                                
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </div>
+   </div>
+</div>
+

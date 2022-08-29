@@ -1,0 +1,126 @@
+<% content_for :title do %>
+   Add Survey
+   <% end %>
+   <%= render :partial => 'partials/header'%>
+   <!-- main menu-->
+   <%= render :partial => 'partials/sidebar'%>
+   <!-- / main menu-->
+   <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+         <div class="content-body">
+            <!-- Basic form layout section start -->
+            <section id="basic-form-layouts">
+               <div class="match-height">
+                  <div class="card p-0">
+                     <div class="card-header">
+                        <h4 class="card-title" id="basic-layout-tooltip">Add Survey</h4>
+                        <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                        <div class="heading-elements">
+                           <ul class="list-inline mb-0">
+                              <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                              <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                              <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="card-body collapse in">
+                        <div class="card-block">
+                           
+                           <%= form_with url: "/surveys", method: :post do |form| %>
+                           <div class="form-body">
+                              <div class="form-group">
+                                 <label>Survey Title</label>
+                                 <input type="text" class="form-control" placeholder="Survey Title" name="survey[title]" >
+                              </div>
+                              <div class="form-group">
+                                 <label>Status</label>
+
+                                 <select id="projectinput5" name="survey[status]" class="form-control">
+												<option selected="" disabled="">Select</option>
+												<option value="Active">Active</option>
+												<option value="Draft">Draft</option>
+												<option value="Inactive">Inactive</option>
+											</select>
+
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-2">
+                                    <div class="form-group">
+                                       <label for="">&nbsp;</label><br/>
+                                       <a class="btn btn-success" id="add-form">+ Add More</a>
+                                    </div>
+                                 </div>
+                                 <div class="test after-add-more c " style="margin-left: 20px;">
+                                    <div class="form-group">
+                                       <label>Question</label>
+                                       <%= form.select :question_id, @questions.map { |t| [t.question_text, t.id]}, {}, class: "form-control", name: "survey_question_answer[question_ids][]", style: "overflow: auto;" %>
+                                    </div>
+                                    <div class="form-group">
+                                       <label>Answer</label>
+                                       <%= form.select :answer_id, @answers.map { |t| [t.answer_text, t.id]}, {}, class: "form-control ", multiple: "multiple", name: "survey_question_answer[answer_id][]", style: "overflow: auto;" %>
+                                    </div>
+                                    <div class="col-md-2">
+                                       <div class="form-group change">
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class=" form-wrapper col-md-12" >
+                              </div>
+                              <div class="form-actions">
+                                 <button type="submit" class="btn btn-primary">
+                                 <i class="icon-check2"></i> Save
+                                 </button>
+                              </div>
+                           </div>
+                           <% end %>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+         </div>
+      </div>
+   </div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         
+         $("body").on("click",".add-more",function(){ 
+            var html = $(".after-add-more").first().clone();
+            $(html).find(".change").html("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
+            $(".after-add-more").last().after(html);
+         });
+      
+         $("body").on("click",".remove",function(){ 
+            $(this).parents(".after-add-more").remove();
+         });
+      });
+      
+      
+      
+      $('.multipleselect').select2();
+            
+            var counter = 1;
+            $("#add-form").click(function() {
+            if (counter > 10) {
+            alert("Only 10 textboxes allow");
+            return false;
+            }
+            $(".last").find('.multipleselect').select2('destroy');
+            var clone = $(".after-add-more:last").clone();
+            $('.form-wrapper').append(clone);
+            $('.multipleselect').select2();
+            
+            counter++;
+            });
+            
+            $("#removebtn").click(function() {
+            if (counter == 1) {
+            return false;
+            }
+            $(".after-add-more").last().remove();
+            counter--;
+            });
+      
+   </script>

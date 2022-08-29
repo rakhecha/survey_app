@@ -1,0 +1,2 @@
+module LinkSurveysHelper
+end

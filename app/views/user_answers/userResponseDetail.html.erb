@@ -1,0 +1,46 @@
+<% content_for :title do %>
+    User Survey Response
+     <% end %>
+     <%= render :partial => 'partials/header'%>
+     <!-- main menu-->
+     <%= render :partial => 'partials/sidebar'%>
+     <!-- / main menu-->
+     <div class="app-content content container-fluid">
+        <div class="content-wrapper">
+           <div class="content-body">
+              <!-- Basic form layout section start -->
+              <section id="basic-form-layouts">
+                 <div class="match-height">
+                    <div class="card p-0">
+                       <div class="card-header">
+                          <h4 class="card-title" id="basic-layout-tooltip">User Survey Response</h4>
+                          <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                          <div class="heading-elements">
+                             <ul class="list-inline mb-0">
+                                <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                             </ul>
+                          </div>
+                       </div>
+                       <div class="card-body collapse in">
+                            <div class="card-block">
+                                <% @obj.each do |response| %>
+                                    <div class="row col-5" style="margin-left: 20px;" >
+                                        <h5 class="fw-bold"><strong><%= cnt %>. <%= get_ques_by_id(response[:ques]) %>?</strong></h5>
+                                        <div class="form-check mb-2">
+                                            <% response[:ans].each do |answer| %>
+                                                <span><%= get_ans_by_id(answer.answer_id) %></span><br>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                <% end %>                    
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </section>   
+           </div>
+        </div>
+     </div>
+    

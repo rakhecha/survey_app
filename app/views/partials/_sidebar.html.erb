@@ -1,0 +1,34 @@
+<!-- main menu-->
+<div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
+   <!-- main menu header-->
+
+   <!-- / main menu header-->
+   <!-- main menu content-->
+
+ 
+
+   <div class="main-menu-content">
+      <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+
+      <li class=" nav-item"><a href="/dashboard"><i class="icon-home3"></i><span data-i18n="nav.bootstrap_tables.table_basic" class="menu-title">Dashboard</span></a></li>
+      <% if current_user.role == 'admin' %>
+         <li class=" nav-item"><a href="/surveys"><i class="icon-home3"></i><span data-i18n="nav.bootstrap_tables.table_basic" class="menu-title">Survey</span></a></li>
+         <li class=" nav-item"><a href="/questions"><i class="icon-home3"></i><span data-i18n="nav.bootstrap_tables.table_basic" class="menu-title">Q & A</span></a></li>
+         <li class=" nav-item"><a href="/user-response"><i class="icon-home3"></i><span data-i18n="nav.bootstrap_tables.table_basic" class="menu-title">Users Survey</span></a></li>
+      <% else %>
+         <li class=" nav-item"><a href="/user_answers"><i class="icon-home3"></i><span data-i18n="nav.bootstrap_tables.table_basic" class="menu-title">Active Surveys</span></a></li>
+
+      <% end %>
+
+      
+
+      
+         
+      </ul>
+   </div>
+   <!-- /main menu content-->
+   <!-- main menu footer-->
+   <!-- include includes/menu-footer-->
+   <!-- main menu footer-->
+</div>
+<!-- / main menu-->

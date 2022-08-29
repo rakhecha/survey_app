@@ -1,0 +1,105 @@
+<% content_for :title do %>
+    Invoices
+ <% end %>
+ <%= render :partial => 'partials/header'%>
+ <!-- main menu-->
+ <%= render :partial => 'partials/sidebar'%>
+ <!-- / main menu-->
+ <div class="app-content content container-fluid">
+    <div class="content-wrapper">
+       <div class="content-body">
+          <!-- Basic form layout section start -->
+          <section id="basic-form-layouts">
+             <div class="match-height">
+                <div class="card p-0">
+                   <div class="card-header">
+                      <h4 class="card-title" id="basic-layout-tooltip">Edit Survey</h4>
+                      <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                      <div class="heading-elements">
+                         <ul class="list-inline mb-0">
+                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                            <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                         </ul>
+                      </div>
+                   </div>
+                   <div class="card-body collapse in">
+                      <div class="card-block">
+                         <%= form_with model: @survey do |form| %>
+                         <div class="form-body">
+ 
+                         <% @clients  = Client.all %>
+                         <div class="form-group">
+                               <label>Client</label>
+                               <%= form.select :client_id, @clients.map { |t| [t.company_name, t.id]}, {}, class: "form-control" %>
+                               <% @invoice.errors.full_messages_for(:company_name).each do |message| %>
+                                  <div class="text-danger"><%= message %></div>
+                                <% end %>
+                            </div>
+                            
+                            <div class="form-group">
+                               <label>Amount</label>
+                               <input type="text" class="form-control" placeholder="Amount" name="invoice[amount]" value="<%= @invoice.amount %>">
+                               <% @invoice.errors.full_messages_for(:amount).each do |message| %>
+                                 <div class="text-danger"><%= message %></div>
+                               <% end %>
+                            </div>
+ 
+                            <div class="form-group">
+                               <label>Currency</label>
+                               <%= form.select :currency, options_for_select(['Rupee', 'Dollor'], :selected => form.object.currency), {}, { :class => 'form-control' } %>
+                               <% @invoice.errors.full_messages_for(:currency).each do |message| %>
+                                  <div class="text-danger"><%= message %></div>
+                                <% end %>
+                            </div>
+                                  
+                            <div class="form-group">
+                               <label>Contract Type</label>
+                               <%= form.select :contract_type, options_for_select(['Monthly', 'Hourly'], :selected => form.object.contract_type), {}, { :class => 'form-control' } %>
+                               <% @invoice.errors.full_messages_for(:contract_type).each do |message| %>
+                                  <div class="text-danger"><%= message %></div>
+                                <% end %>
+                            </div>
+ 
+                            <div class="form-group">
+                               <label>Payment Cycle</label>
+                               <%= form.select :payment_cycle, options_for_select(['Monthly', 'Weekly'], :selected => form.object.payment_cycle), {}, { :class => 'form-control' } %>
+                               <% @invoice.errors.full_messages_for(:payment_cycle).each do |message| %>
+                                  <div class="text-danger"><%= message %></div>
+                                <% end %>
+                            </div>
+                            
+                            <div class="form-group" id = "day_of_month">
+                               <label>Day of the month</label>
+                               <%= form.select :day_of_month, options_for_select(['Select','1', '2','3','4','5','6','7','8','9','10','11','12', '13', '14', '15', '16', '17', '18', '19','20','21','22','23', '24', '25','26', '27','28'], :selected => form.object.day_of_month), {}, { :class => 'form-control', :id => 'day_of_month1' } %>
+                               <% @invoice.errors.full_messages_for(:day_of_month).each do |message| %>
+                                  <div class="text-danger"><%= message %></div>
+                                <% end %>
+                            </div>
+ 
+                            <div class="form-group" id="day_of_week">
+                               <label>Day of the week</label>
+                               <%= form.select :day_of_week, options_for_select(['Select','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], :selected => form.object.day_of_week), {}, { :class => 'form-control',:id => 'day_of_week1' } %>
+                               <% @invoice.errors.full_messages_for(:day_of_week).each do |message| %>
+                                  <div class="text-danger"><%= message %></div>
+                                <% end %>
+                            </div>
+                            
+                            <div class="form-actions">
+                               <button type="submit" class="btn btn-primary">
+                               <i class="icon-check2"></i> Save
+                               </button>
+                            </div>
+                         </div>
+                         <% end %>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </section>
+          <!-- // Basic form layout section end -->
+       </div>
+    </div>
+ </div>
+ 
+ 

@@ -1,0 +1,104 @@
+<% content_for :title do %>
+    Add Q and A
+ <% end %>
+ <%= render :partial => 'partials/header'%>
+ <!-- main menu-->
+ <%= render :partial => 'partials/sidebar'%>
+ <!-- / main menu-->
+ <div class="app-content content container-fluid">
+    <div class="content-wrapper">
+       <div class="content-body">
+          <!-- Basic form layout section start -->
+          <section id="basic-form-layouts">
+             <div class="match-height">
+                <div class="card p-0">
+                   <div class="card-header">
+                      <h4 class="card-title" id="basic-layout-tooltip">Add Q and A</h4>
+                      <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                      <div class="heading-elements">
+                         <ul class="list-inline mb-0">
+                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                            <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                         </ul>
+                      </div>
+                   </div>
+                   <div class="card-body collapse in">
+                      <div class="card-block">
+                        
+                            <div class="form-group">
+                                <label>Q and A Type</label>
+                                <select class="form-control" id="ques_type" name="q_a"><option selected="selected" disabled="disabled" value="Select">Select</option>
+                                    <option value="Question">Question</option>
+                                    <option value="Answer">Answer</option>
+                                </select>
+                            </div>
+                            
+                            <div id="ques_selected" style="display:none">
+                            
+                            <%= form_with url: "/questions", method: :post do |form| %>
+                                <div class="form-body">
+                                    
+                                    <div class="form-group">
+                                    <label>Question</label>
+                                    <textarea class="form-control" name="question[question_text]" placeholder="Question" id="basicTextarea" rows="3" spellcheck="false"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="icon-check2"></i> Save
+                                    </button>
+                                </div>
+                            <% end %>
+                            </div>
+
+                            <div id="ans_selected" style="display:none">
+                                    <%= form_with url: "/answers", method: :post do |form| %>
+                                    <div class="form-body">
+                                            <div class="form-group">
+                                            <label>Answer</label>
+                                            <input type="text" class="form-control" placeholder="Answer" name="answer[answer_text]" >
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="icon-check2"></i> Save
+                                        </button>
+                                    </div>
+                                <% end %>
+                            </div>
+
+                                                    
+                        
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </section>   
+       </div>
+    </div>
+ </div>
+
+
+<script>
+$(document).ready(function(){
+    $("#ques_type").change(function(){
+        displayInputs();
+    });
+});
+
+function displayInputs() {
+    var ques_type = $("#ques_type").val();
+
+  
+   if(ques_type == 'Question') {
+      $("#ques_selected").css('display', 'block');
+      $("#ans_selected").css('display','none');
+   } else {
+      $("#ques_selected").css('display', 'none');
+      $("#ans_selected").css('display','block');
+   }
+}
+
+</script>
