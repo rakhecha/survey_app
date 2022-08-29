@@ -42,12 +42,11 @@ class UserAnswersController < ApplicationController
       @userAnswer.save!
     end
     flash[:notice] = 'Surevy response successfully submitted'
-    redirect_to '/user-response'
+    redirect_to '/user_answers'
   end
 
   def userResponse
-    @data = UserAnswer.all
-    @data = UserAnswer.select("DISTINCT ON (user_answers.user_id) user_answers.*")
+    @data = UserAnswer.select("DISTINCT ON (user_answers.link_survey_id) user_answers.*")
   end
 
   def userResponseDetail

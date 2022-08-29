@@ -25,12 +25,12 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
     
-        if @question.update(question_params)
-          flash[:notice] = 'Question successfully updated'
-          redirect_to questions_path
-        else
-          render :edit, status: :unprocessable_entity
-        end
+      if @question.update(question_params)
+        flash[:notice] = 'Question successfully updated'
+        redirect_to questions_path
+      else
+        render :edit, status: :unprocessable_entity
+      end
   end
 
   def new
