@@ -44,17 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_28_081302) do
     t.index ["question_id"], name: "index_survey_ques_answers_on_question_id"
   end
 
-  create_table "survey_question_answers", force: :cascade do |t|
-    t.bigint "survey_id", null: false
-    t.bigint "question_id", null: false
-    t.bigint "answer_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_survey_question_answers_on_answer_id"
-    t.index ["question_id"], name: "index_survey_question_answers_on_question_id"
-    t.index ["survey_id"], name: "index_survey_question_answers_on_survey_id"
-  end
-
   create_table "surveys", force: :cascade do |t|
     t.string "title"
     t.string "status"
@@ -88,9 +77,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_28_081302) do
   add_foreign_key "survey_ques_answers", "answers"
   add_foreign_key "survey_ques_answers", "link_surveys"
   add_foreign_key "survey_ques_answers", "questions"
-  add_foreign_key "survey_question_answers", "answers"
-  add_foreign_key "survey_question_answers", "questions"
-  add_foreign_key "survey_question_answers", "surveys"
   add_foreign_key "user_answers", "answers"
   add_foreign_key "user_answers", "link_surveys", column: "link_surveys_id"
   add_foreign_key "user_answers", "questions"

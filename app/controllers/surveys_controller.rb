@@ -16,7 +16,6 @@ class SurveysController < ApplicationController
     
     @survey = LinkSurvey.new(survey_params)
     if @survey.save!
-      
       # logger.info(params[:survey_question_answer]['answer_id'])
 
       questions = params[:survey_question_answer]['question_ids']

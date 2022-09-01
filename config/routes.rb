@@ -24,6 +24,4 @@ Rails.application.routes.draw do
   get '/user-response', :to => 'user_answers#userResponse'
   get '/user-response/:user_id/:survey_id', :to => 'user_answers#userResponseDetail'
 
-
-
 end
